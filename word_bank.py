@@ -1,7 +1,32 @@
 def get_word_bank(age):
     age_4_words = [
+        {"word": "Pig", "target_phoneme": "p", "position": "initial", "category": "Age 4", "process": "Early Acquisition"},
+        {"word": "Ball", "target_phoneme": "b", "position": "initial", "category": "Age 4", "process": "Early Acquisition"},
+        {"word": "Apple", "target_phoneme": "p", "position": "medial", "category": "Age 4", "process": "Early Acquisition"},
+        {"word": "Bunny", "target_phoneme": "n", "position": "medial", "category": "Age 4", "process": "Early Acquisition"},
         {"word": "Cup", "target_phoneme": "p", "position": "final", "category": "Age 4", "process": "Final Consonant Deletion"},
         {"word": "Sun", "target_phoneme": "n", "position": "final", "category": "Age 4", "process": "Final Consonant Deletion"},
+
+        {"word": "Ten", "target_phoneme": "t", "position": "initial", "category": "Age 4", "process": "Early Acquisition"},
+        {"word": "Dog", "target_phoneme": "d", "position": "initial", "category": "Age 4", "process": "Early Acquisition"},
+        {"word": "Water", "target_phoneme": "t", "position": "medial", "category": "Age 4", "process": "Early Acquisition"},
+        {"word": "Ladder", "target_phoneme": "d", "position": "medial", "category": "Age 4", "process": "Early Acquisition"},
+        {"word": "Boat", "target_phoneme": "t", "position": "final", "category": "Age 4", "process": "Final Consonant Deletion"},
+        {"word": "Bed", "target_phoneme": "d", "position": "final", "category": "Age 4", "process": "Final Consonant Deletion"},
+
+        {"word": "Key", "target_phoneme": "k", "position": "initial", "category": "Age 4", "process": "Fronting"},
+        {"word": "Goat", "target_phoneme": "g", "position": "initial", "category": "Age 4", "process": "Fronting"},
+        {"word": "Cookie", "target_phoneme": "k", "position": "medial", "category": "Age 4", "process": "Fronting"},
+        {"word": "Tiger", "target_phoneme": "g", "position": "medial", "category": "Age 4", "process": "Fronting"},
+        {"word": "Bike", "target_phoneme": "k", "position": "final", "category": "Age 4", "process": "Fronting"},
+        {"word": "Pig", "target_phoneme": "g", "position": "final", "category": "Age 4", "process": "Fronting"},
+
+        {"word": "Fish", "target_phoneme": "f", "position": "initial", "category": "Age 4", "process": "Early Fricatives"},
+        {"word": "Whale", "target_phoneme": "w", "position": "initial", "category": "Age 4", "process": "Glides"},
+        {"word": "Elephant", "target_phoneme": "f", "position": "medial", "category": "Age 4", "process": "Early Fricatives"},
+        {"word": "Leaf", "target_phoneme": "f", "position": "final", "category": "Age 4", "process": "Early Fricatives"},
+
+        {"word": "Banana", "target_phoneme": None, "position": "syllable_shape", "category": "Age 4", "process": "Weak Syllable / 3-Syllable Check"},
     ]
 
     age_5_words = [
@@ -20,10 +45,10 @@ def get_word_bank(age):
         {"word": "Flashlight", "target_phoneme": "ʃ", "position": "medial", "category": "Age 5", "process": "Stopping"},
         {"word": "Fish", "target_phoneme": "ʃ", "position": "final", "category": "Age 5", "process": "Stopping"},
 
-        {"word": "Spider", "target_phoneme": ["s", "p"], "position": "initial_cluster", "category": "Age 5", "process": "Cluster Reduction"},
-        {"word": "Star", "target_phoneme": ["s", "t"], "position": "initial_cluster", "category": "Age 5", "process": "Cluster Reduction"},
-        {"word": "Blue", "target_phoneme": ["b", "l"], "position": "initial_cluster", "category": "Age 5", "process": "Cluster Reduction"},
-        {"word": "Plane", "target_phoneme": ["p", "l"], "position": "initial_cluster", "category": "Age 5", "process": "Cluster Reduction"},
+        {"word": "Spider", "target_phoneme": "sp", "position": "initial_cluster", "category": "Age 5", "process": "Cluster Reduction"},
+        {"word": "Star", "target_phoneme": "st", "position": "initial_cluster", "category": "Age 5", "process": "Cluster Reduction"},
+        {"word": "Blue", "target_phoneme": "bl", "position": "initial_cluster", "category": "Age 5", "process": "Cluster Reduction"},
+        {"word": "Plane", "target_phoneme": "pl", "position": "initial_cluster", "category": "Age 5", "process": "Cluster Reduction"},
     ]
 
     age_6_7_words = [
@@ -46,8 +71,8 @@ def get_word_bank(age):
         {"word": "Watch", "target_phoneme": "tʃ", "position": "final", "category": "Age 6-7", "process": "Affricates"},
         {"word": "Bridge", "target_phoneme": "dʒ", "position": "final", "category": "Age 6-7", "process": "Affricates"},
 
-        {"word": "Frog", "target_phoneme": ["f", "r"], "position": "initial_cluster", "category": "Age 6-7", "process": "R-Cluster"},
-        {"word": "Truck", "target_phoneme": ["t", "r"], "position": "initial_cluster", "category": "Age 6-7", "process": "R-Cluster"},
+        {"word": "Frog", "target_phoneme": "fr", "position": "initial_cluster", "category": "Age 6-7", "process": "Cluster / R-Cluster"},
+        {"word": "Truck", "target_phoneme": "tr", "position": "initial_cluster", "category": "Age 6-7", "process": "Cluster / R-Cluster"},
     ]
 
     age_8_words = [
