@@ -4,32 +4,40 @@ import json
 speech_key = "7iyT7N6LiE2S99igEjCvt3NHZEy8xCfPsxQLzN60sZcEqGn4F5HKJQQJ99BKAC3pKaRXJ3w3AAAYACOGzpew"
 speech_endpoint = "https://eastasia.api.cognitive.microsoft.com/"
 
-
 def assess_word(target_word, max_retries=3):
     retry_count = 0
 
     while retry_count < max_retries:
+
+        # Configure Azure Speech service
         speech_config = speechsdk.SpeechConfig(
-            subscription=speech_key,
-            endpoint=speech_endpoint
+        subscription=speech_key,
+        endpoint=speech_endpoint
+        )
+
+        speech_config.set_property(
+        speechsdk.PropertyId.SpeechServiceConnection_EndSilenceTimeoutMs,
+        "3000"
         )
 
         language = "en-US"
-        audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
+        audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True) 
 
+        # Create speech recognizer instance
         speech_recognizer = speechsdk.SpeechRecognizer(
-            speech_config=speech_config,
-            language=language,
-            audio_config=audio_config
+        speech_config=speech_config,
+        language=language,
+        audio_config=audio_config
         )
 
+        # Configure pronunciation assessment
         pronunciation_assessment_config = speechsdk.PronunciationAssessmentConfig(
-            json_string=(
-                f'{{"referenceText":"{target_word}",'
-                f'"gradingSystem":"HundredMark",'
-                f'"granularity":"Phoneme",'
-                f'"phonemeAlphabet":"IPA",'
-                f'"nBestPhonemeCount":5}}'
+        json_string=(
+            f'{{"referenceText":"{target_word}",'
+            f'"gradingSystem":"HundredMark",'
+            f'"granularity":"Phoneme",'
+            f'"phonemeAlphabet":"IPA",'
+            f'"nBestPhonemeCount":5}}'
             )
         )
 
@@ -37,6 +45,7 @@ def assess_word(target_word, max_retries=3):
             lambda evt: print(f"SESSION ID: {evt.session_id}")
         )
 
+        # Apply pronunciation assessment settings to recognizer
         pronunciation_assessment_config.apply_to(speech_recognizer)
 
         print(f"Please say: {target_word}")
@@ -48,14 +57,8 @@ def assess_word(target_word, max_retries=3):
             print("Recognized:", speech_recognition_result.text)
 
             pronunciation_assessment_result = speechsdk.PronunciationAssessmentResult(
-                speech_recognition_result
+                speech_recognition_result 
             )
-
-            print("\nSentence Scores")
-            print("Accuracy:", pronunciation_assessment_result.accuracy_score)
-            print("Fluency:", pronunciation_assessment_result.fluency_score)
-            print("Completeness:", pronunciation_assessment_result.completeness_score)
-            print("Pronunciation:", pronunciation_assessment_result.pronunciation_score)
 
             pronunciation_assessment_result_json = speech_recognition_result.properties.get(
                 speechsdk.PropertyId.SpeechServiceResponse_JsonResult
@@ -70,7 +73,7 @@ def assess_word(target_word, max_retries=3):
                 "pronunciation": pronunciation_assessment_result.pronunciation_score,
                 "raw_data": data
             }
-
+        
         elif speech_recognition_result.reason == speechsdk.ResultReason.NoMatch:
             retry_count += 1
             print(f"No speech could be recognized. Retrying word '{target_word}' ({retry_count}/{max_retries})...\n")
