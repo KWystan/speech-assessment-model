@@ -110,6 +110,21 @@ def process_cluster_target(item, phonemes, results):
         print(f"{target_word} - Error")
 
 
+def select_assessed_word(words, target_word):
+    normalized_target = target_word.lower().strip(" .?!,")
+
+    for word in words:
+        spoken_word = word.get("Word", "").lower().strip(" .?!,")
+        if spoken_word == normalized_target and "Phonemes" in word:
+            return word
+
+    for word in words:
+        if "Phonemes" in word:
+            return word
+
+    return None
+
+
 def main():
     child_name = input("Enter child name: ")
     child_age = int(input("Enter child age: "))
@@ -145,27 +160,28 @@ def main():
 
         data = result["raw_data"]
         nbest = data["NBest"][0]
+        assessed_word = select_assessed_word(nbest["Words"], target_word)
 
-        for word in nbest["Words"]:
-            if "Phonemes" not in word:
-                continue
+        if target_phoneme is None:
+            results.append({
+                "word": target_word,
+                "expected": None,
+                "status": "No target phoneme",
+                "likely": None,
+                "error": None
+            })
+            print(f"{target_word} - No target phoneme")
+            continue
 
-            if target_phoneme is None:
-                results.append({
-                    "word": target_word,
-                    "expected": None,
-                    "status": "No target phoneme",
-                    "likely": None,
-                    "error": None
-                })
-                print(f"{target_word} - No target phoneme")
-                continue
+        if assessed_word is None:
+            print(f"{target_word} - No phoneme data returned")
+            continue
 
-            if isinstance(target_phoneme, str):
-                process_single_target(item, word["Phonemes"], results)
+        if isinstance(target_phoneme, str):
+            process_single_target(item, assessed_word["Phonemes"], results)
 
-            elif isinstance(target_phoneme, list):
-                process_cluster_target(item, word["Phonemes"], results)
+        elif isinstance(target_phoneme, list):
+            process_cluster_target(item, assessed_word["Phonemes"], results)
 
     print("\n" + "=" * 50)
     print("FINAL RESULTS")

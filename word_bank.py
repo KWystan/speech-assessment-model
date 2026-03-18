@@ -93,11 +93,11 @@ def get_word_bank(age):
     ]
 
     if age == 8:
-        return age_4_words + age_5_words + age_6_7_words + age_8_words
+        return age_8_words
     elif age == 7 or age == 6:
-        return age_4_words + age_5_words + age_6_7_words
+        return age_6_7_words
     elif age == 5:
-        return age_4_words + age_5_words
+        return age_5_words
     elif age == 4:
         return age_4_words
     else:
